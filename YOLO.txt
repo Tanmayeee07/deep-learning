@@ -1,0 +1,26 @@
+
+!pip install ultralytics opencv-python matplotlib
+
+from ultralytics import YOLO
+import cv2
+import glob
+import os
+
+mode = 'image' 
+image_folder = 'test_images'  
+image_output_folder = 'output_images'
+video_path = 'test_video.mp4'  
+video_output_path = 'output_video.mp4' 
+webcam_id = 0  
+
+model = YOLO('yolov8n.pt')  
+
+image_path = "image_01.jpg"
+results = model.predict(source=image_path, show=True)
+
+results = model.predict(source=image_path, save=True)
+print("Output saved in:", results[0].save_dir)
+
+video_path = "video.mp4"
+results = model.predict(source=video_path, save=True, show=True)
+print("Video output saved in:", results[0].save_dir)
